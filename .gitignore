@@ -1,0 +1,58 @@
+# Node modules
+node_modules/
+**/node_modules/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Build outputs
+/client/dist
+/dist
+/build
+/server/dist
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+logs/
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.sublime-workspace
+
+# Coverage and cache
+coverage/
+.cache/
+
+# Generated certs
+*.pem
+
+# Misc
+*.tgz
+
+# Local DB
+*.sqlite
+
+# Ignore credentials or secrets produced by scripts
+server/.env
+client/.env
+#md
+ADMIN_ROUTER_SETUP.md
+ADMIN_SETUP.md
+API_REFERENCE.md
+CAPTIVE_PORTAL_GUIDE.md
+DEPLOY_RENDER.md
+DEPLOY_VERCEL.md
+DEVELOPERGUIDE.md
+README_ADMIN.md
+SETUP_CHECKLIST.md
+

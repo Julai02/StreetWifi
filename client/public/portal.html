@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StreetWifi - Get Connected</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    
+    .container {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      width: 100%;
+      max-width: 500px;
+      padding: 40px;
+    }
+    
+    .header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    
+    .logo {
+      font-size: 32px;
+      font-weight: bold;
+      color: #DC2626;
+      margin-bottom: 10px;
+    }
+    
+    .title {
+      font-size: 24px;
+      font-weight: 600;
+      color: #1f2937;
+      margin-bottom: 5px;
+    }
+    
+    .subtitle {
+      font-size: 14px;
+      color: #6b7280;
+    }
+    
+    .pricing {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      gap: 12px;
+      margin: 30px 0;
+    }
+    
+    .plan {
+      border: 2px solid #e5e7eb;
+      border-radius: 8px;
+      padding: 16px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background: #f9fafb;
+    }
+    
+    .plan:hover {
+      border-color: #DC2626;
+      background: #fef2f2;
+      transform: translateY(-2px);
+    }
+    
+    .plan.selected {
+      border-color: #DC2626;
+      background: linear-gradient(135deg, #fef2f2, #fee2e2);
+    }
+    
+    .plan-hours {
+      font-size: 18px;
+      font-weight: bold;
+      color: #1f2937;
+      margin-bottom: 5px;
+    }
+    
+    .plan-price {
+      font-size: 20px;
+      font-weight: 600;
+      color: #DC2626;
+      margin-bottom: 5px;
+    }
+    
+    .plan-unit {
+      font-size: 12px;
+      color: #9ca3af;
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    label {
+      display: block;
+      font-size: 14px;
+      font-weight: 500;
+      color: #374151;
+      margin-bottom: 8px;
+    }
+    
+    input, select {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      font-size: 14px;
+      transition: border-color 0.3s;
+    }
+    
+    input:focus, select:focus {
+      outline: none;
+      border-color: #DC2626;
+      box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+    }
+    
+    .button-group {
+      display: flex;
+      gap: 12px;
+      margin-top: 24px;
+    }
+    
+    button {
+      flex: 1;
+      padding: 12px;
+      border: none;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    
+    .btn-primary {
+      background: linear-gradient(135deg, #DC2626, #991b1b);
+      color: white;
+    }
+    
+    .btn-primary:hover:not(:disabled) {
+      box-shadow: 0 10px 20px rgba(220, 38, 38, 0.2);
+      transform: translateY(-2px);
+    }
+    
+    .btn-primary:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    
+    .status {
+      margin-top: 20px;
+      padding: 12px;
+      border-radius: 6px;
+      font-size: 14px;
+      text-align: center;
+      display: none;
+    }
+    
+    .status.info {
+      background: #dbeafe;
+      color: #1e40af;
+      display: block;
+    }
+    
+    .status.success {
+      background: #dcfce7;
+      color: #166534;
+      display: block;
+    }
+    
+    .status.error {
+      background: #fee2e2;
+      color: #991b1b;
+      display: block;
+    }
+    
+    .loading {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border: 2px solid #999;
+      border-radius: 50%;
+      border-top-color: transparent;
+      animation: spin 0.6s linear infinite;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    
+    .info-box {
+      background: #fef2f2;
+      border-left: 4px solid #DC2626;
+      padding: 12px;
+      border-radius: 4px;
+      font-size: 13px;
+      color: #7f1d1d;
+      margin-bottom: 20px;
+    }
+    
+    .session-info {
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      padding: 16px;
+      border-radius: 6px;
+      margin-bottom: 20px;
+      display: none;
+    }
+    
+    .session-info.show {
+      display: block;
+    }
+    
+    .timer {
+      font-size: 18px;
+      font-weight: bold;
+      color: #DC2626;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="logo">🛜 StreetWifi</div>
+      <div class="title">Get Connected</div>
+      <div class="subtitle">Fast, Reliable WiFi Access</div>
+    </div>
+    
+    <div id="sessionInfo" class="session-info">
+      <div style="margin-bottom: 10px;">✓ Active Session</div>
+      <div>Time Remaining: <span id="timeRemaining" class="timer">--:--</span></div>
+    </div>
+    
+    <div class="info-box">
+      💡 Pay once and get instant internet access for your device
+    </div>
+    
+    <form id="paymentForm">
+      <div class="form-group">
+        <label>Select Duration</label>
+        <div class="pricing" id="pricingPlans">
+          <!-- Plans generated by JavaScript -->
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="phoneNumber">Phone Number (M-Pesa)</label>
+        <input 
+          type="tel" 
+          id="phoneNumber"
+          placeholder="e.g. 0712345678"
+          required
+        >
+      </div>
+      
+      <div class="button-group">
+        <button type="button" id="checkStatusBtn" class="btn-primary">Check Status</button>
+        <button type="submit" id="payBtn" class="btn-primary">Pay Now</button>
+      </div>
+      
+      <div id="status" class="status"></div>
+    </form>
+  </div>
+
+  <script>
+    const API_URL = 'http://localhost:5000/api/portal';
+    const PRICE_PER_HOUR = 10;
+    const VALID_HOURS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 24];
+    const PLANS = VALID_HOURS.map(hours => ({
+      hours,
+      price: hours * PRICE_PER_HOUR
+    }));
+    
+    let selectedHours = 1;
+    let deviceMac = '';
+    
+    // Get device MAC from browser (simplified - would need actual MAC address from router)
+    async function getDeviceMac() {
+      // In a real implementation, this would come from the router's captive portal
+      // For now, we'll generate a placeholder or get from query param
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get('mac') || generateFakeMac();
+    }
+    
+    function generateFakeMac() {
+      return 'XX:XX:XX:XX:XX:XX';
+    }
+    
+    // Initialize pricing plans
+    function initializePlans() {
+      const pricingDiv = document.getElementById('pricingPlans');
+      pricingDiv.innerHTML = '';
+      
+      PLANS.forEach(plan => {
+        const div = document.createElement('div');
+        div.className = 'plan' + (plan.hours === selectedHours ? ' selected' : '');
+        div.onclick = () => selectPlan(plan.hours);
+        
+        div.innerHTML = `
+          <div class="plan-hours">${plan.hours} ${plan.hours === 1 ? 'Hour' : 'Hours'}</div>
+          <div class="plan-price">KES ${plan.price}</div>
+          <div class="plan-unit">@ KES ${plan.price / plan.hours}/hr</div>
+        `;
+        
+        pricingDiv.appendChild(div);
+      });
+    }
+    
+    function selectPlan(hours) {
+      selectedHours = hours;
+      document.querySelectorAll('.plan').forEach((el, idx) => {
+        el.classList.toggle('selected', PLANS[idx].hours === hours);
+      });
+    }
+    
+    // Check device session status
+    async function checkStatus() {
+      try {
+        showStatus('Checking status...', 'info');
+        
+        const response = await fetch(`${API_URL}/verify-access`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ deviceMac }),
+        });
+        
+        const data = await response.json();
+        
+        if (data.canAccess) {
+          showSessionInfo(data);
+          showStatus(`✓ Active - ${data.hoursRemaining}h ${data.minutesRemaining}m remaining`, 'success');
+        } else {
+          showStatus('❌ No active session. Click Pay Now to get started!', 'error');
+        }
+      } catch (error) {
+        showStatus('Error checking status: ' + error.message, 'error');
+      }
+    }
+    
+    // Initiate payment
+    async function handlePayment(e) {
+      e.preventDefault();
+      
+      const phone = document.getElementById('phoneNumber').value;
+      if (!phone) {
+        showStatus('Please enter your phone number', 'error');
+        return;
+      }
+      
+      const payBtn = document.getElementById('payBtn');
+      payBtn.disabled = true;
+      payBtn.innerHTML = '<div class="loading"></div> Processing...';
+      
+      try {
+        showStatus('Initiating payment...', 'info');
+        
+        const response = await fetch(`${API_URL}/payment/initiate`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            deviceMac,
+            hours: selectedHours,
+            phoneNumber: phone,
+          }),
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+          showStatus('✓ STK Push sent! Check your phone for payment prompt.', 'success');
+          document.getElementById('phoneNumber').value = '';
+          
+          // Check payment status every 3 seconds for 2 minutes
+          let attempts = 0;
+          const checkInterval = setInterval(async () => {
+            attempts++;
+            if (attempts > 40) {
+              clearInterval(checkInterval);
+              showStatus('Payment timeout. Please try again.', 'error');
+              return;
+            }
+            
+            try {
+              const statusResponse = await fetch(`${API_URL}/verify-access`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ deviceMac }),
+              });
+              
+              const statusData = await statusResponse.json();
+              if (statusData.canAccess) {
+                clearInterval(checkInterval);
+                showStatus('✓ Payment successful! Internet access granted.', 'success');
+                showSessionInfo(statusData);
+              }
+            } catch {}
+          }, 3000);
+        } else {
+          showStatus('Error: ' + data.message, 'error');
+        }
+      } catch (error) {
+        showStatus('Error: ' + error.message, 'error');
+      } finally {
+        payBtn.disabled = false;
+        payBtn.innerHTML = 'Pay Now';
+      }
+    }
+    
+    function showStatus(message, type) {
+      const status = document.getElementById('status');
+      status.textContent = message;
+      status.className = `status ${type}`;
+    }
+    
+    function showSessionInfo(data) {
+      const sessionInfo = document.getElementById('sessionInfo');
+      sessionInfo.classList.add('show');
+      
+      if (data.timeRemaining) {
+        const hours = Math.floor(data.timeRemaining / 3600);
+        const minutes = Math.floor((data.timeRemaining % 3600) / 60);
+        document.getElementById('timeRemaining').textContent = 
+          `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
+      }
+    }
+    
+    // Initialize
+    document.addEventListener('DOMContentLoaded', async () => {
+      deviceMac = await getDeviceMac();
+      initializePlans();
+      
+      document.getElementById('paymentForm').addEventListener('submit', handlePayment);
+      document.getElementById('checkStatusBtn').addEventListener('click', checkStatus);
+      
+      // Check status on load
+      checkStatus();
+    });
+  </script>
+</body>
+</html>
