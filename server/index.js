@@ -107,10 +107,11 @@ const startServer = async () => {
     // Initialize cron jobs
     initializeCronJobs();
 
-    // Start server
-    app.listen(PORT, () => {
+    // Start server - bind to 0.0.0.0 for Render and cloud deployments
+    app.listen(PORT, '0.0.0.0', () => {
       console.log(`✓ StreetWifi Server running on port ${PORT}`);
       console.log(`✓ Environment: ${process.env.NODE_ENV || 'development'}`);
+      console.log(`✓ Listening on 0.0.0.0:${PORT}`);
     });
   } catch (error) {
     console.error('✗ Server startup error:', error);
