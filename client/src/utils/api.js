@@ -1,6 +1,8 @@
 import axios from 'axios';
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+// Ensure `/api` suffix when using environment variable. Vite variables are only available at build time.
+const rawUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+const API_BASE_URL = rawUrl.endsWith('/api') ? rawUrl : `${rawUrl}/api`;
 
 // log base URL for debugging (will show in browser console)
 console.log('API_BASE_URL =', API_BASE_URL);
