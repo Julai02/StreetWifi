@@ -7,13 +7,7 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {
-      colors: {
-        'primary-red': '#DC2626',
-        'dark-red': '#7F1D1D',
-        'light-red': '#FEE2E2',
-      },
-    },
+    extend: {},
   },
   plugins: [
     forms,

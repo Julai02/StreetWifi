@@ -71,7 +71,7 @@ export default function DashboardPage() {
       <div className="max-w-4xl mx-auto">
         {/* Welcome Section */}
         <div className="bg-white rounded-lg shadow-md p-6 mb-6">
-          <h1 className="text-3xl font-bold text-primary-red mb-2">
+          <h1 className="text-3xl font-bold text-blue-600 mb-2">
             Welcome, {user?.firstName}!
           </h1>
           <p className="text-gray-600">
