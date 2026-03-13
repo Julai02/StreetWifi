@@ -45,23 +45,7 @@ const adminSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-// Hash password before saving (only if password is modified and not already hashed)
-adminSchema.pre('save', async function (next) {
-  if (!this.isModified('password')) return next();
-
-  // Check if password is already hashed (bcrypt hashes start with $2a, $2b, or $2y)
-  if (this.password.startsWith('$2a') || this.password.startsWith('$2b') || this.password.startsWith('$2y')) {
-    return next();
-  }
-
-  try {
-    const salt = await bcrypt.genSalt(10);
-    this.password = await bcrypt.hash(this.password, salt);
-    next();
-  } catch (error) {
-    next(error);
-  }
-});
+// Password hashing handled in application logic
 
 // Method to compare passwords
 adminSchema.methods.matchPassword = async function (enteredPassword) {
