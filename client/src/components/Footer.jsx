@@ -3,42 +3,42 @@ import { Link } from 'react-router-dom';
 
 export default function Footer() {
   return (
-    <footer className="bg-dark-red text-white mt-auto">
-      <div className="max-w-7xl mx-auto px-4 py-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+    <footer className="mt-auto bg-slate-900 text-slate-200">
+      <div className="mx-auto max-w-7xl px-4 py-10">
+        <div className="mb-8 grid grid-cols-1 gap-8 md:grid-cols-3">
           <div>
-            <h3 className="font-bold text-lg mb-4">StreetWifi</h3>
-            <p className="text-light-red text-sm">
-              High-speed WiFi access for everyone in the streets. Developed by HolyTech Ltd.
+            <h3 className="mb-4 text-lg font-semibold text-white">StreetWifi</h3>
+            <p className="text-sm text-slate-400">
+              Fast, simple WiFi access for busy public spaces, powered by seamless payments and smart session control.
             </p>
           </div>
           <div>
-            <h4 className="font-bold mb-4">Quick Links</h4>
-            <ul className="space-y-2 text-sm">
+            <h4 className="mb-4 font-semibold text-white">Quick Links</h4>
+            <ul className="space-y-2 text-sm text-slate-400">
               <li>
-                <Link to="/" className="hover:text-light-red transition">
+                <Link to="/" className="transition hover:text-blue-300">
                   Home
                 </Link>
               </li>
               <li>
-                <Link to="/login" className="hover:text-light-red transition">
-                  Login
+                <Link to="/admin/login" className="transition hover:text-blue-300">
+                  Admin Login
                 </Link>
               </li>
               <li>
-                <Link to="/register" className="hover:text-light-red transition">
-                  Register
-                </Link>
+                <a href="/portal.html" className="transition hover:text-blue-300">
+                  Portal
+                </a>
               </li>
             </ul>
           </div>
           <div>
-            <h4 className="font-bold mb-4">Contact</h4>
-            <p className="text-sm text-light-red">support@streetwifi.com</p>
-            <p className="text-sm text-light-red">+254 XXX XXX XXX</p>
+            <h4 className="mb-4 font-semibold text-white">Contact</h4>
+            <p className="text-sm text-slate-400">support@streetwifi.com</p>
+            <p className="text-sm text-slate-400">+254 700 000 000</p>
           </div>
         </div>
-        <div className="border-t border-red-700 pt-4 text-center text-sm text-light-red">
+        <div className="border-t border-slate-800 pt-4 text-center text-sm text-slate-500">
           <p>&copy; 2026 StreetWifi by HolyTech Ltd. All rights reserved.</p>
         </div>
       </div>

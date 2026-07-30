@@ -43,16 +43,6 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex flex-col">
-      {/* Admin Login Button - Top Right Corner */}
-      <div className="absolute top-4 right-4">
-        <button
-          onClick={() => navigate('/admin/login')}
-          className="text-sm text-gray-600 hover:text-gray-800 underline"
-        >
-          Admin Access
-        </button>
-      </div>
-
       {/* Main Content */}
       <div className="flex-1 flex items-center justify-center px-4">
         <div className="w-full max-w-md">

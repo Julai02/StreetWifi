@@ -1,182 +1,162 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+const features = [
+  {
+    icon: '⚡',
+    title: 'Instant Access',
+    text: 'No registration required. Connect, pay, and browse in seconds.',
+  },
+  {
+    icon: '💰',
+    title: 'Affordable Pricing',
+    text: 'Simple hourly pricing at just 10 KES per hour.',
+  },
+  {
+    icon: '🔒',
+    title: 'Secure Payments',
+    text: 'M-Pesa payments via PayHero keep checkout fast and safe.',
+  },
+  {
+    icon: '📱',
+    title: 'Easy One-Click',
+    text: 'Choose your hours, confirm payment, and start browsing.',
+  },
+  {
+    icon: '⏰',
+    title: 'Flexible Hours',
+    text: 'Purchase 1 to 24 hours and extend when you need more.',
+  },
+  {
+    icon: '🌍',
+    title: 'Always Online',
+    text: 'Reliable hotspot access for customers throughout the day.',
+  },
+];
+
+const steps = [
+  { number: '1', title: 'Connect', text: 'Join the StreetWifi network on your device.' },
+  { number: '2', title: 'Select Hours', text: 'Choose the amount of time you need.' },
+  { number: '3', title: 'Pay via M-Pesa', text: 'Approve the prompt on your phone.' },
+  { number: '4', title: 'Enjoy Internet', text: 'Your session starts immediately.' },
+];
+
 export default function HomePage() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Auto-redirect to portal after 3 seconds
-    const timer = setTimeout(() => {
-      const mac = new URLSearchParams(window.location.search).get('mac');
-      if (mac) {
-        window.location.href = `/portal.html?mac=${mac}`;
-      }
-    }, 3000);
-
-    return () => clearTimeout(timer);
+    const mac = new URLSearchParams(window.location.search).get('mac');
+    if (mac) {
+      window.location.href = `/portal.html?mac=${mac}`;
+    }
   }, []);
 
   return (
-    <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="bg-gradient-to-r from-primary-red to-dark-red text-white py-20">
-        <div className="max-w-6xl mx-auto px-4 text-center">
-          <div className="mb-6">
-            <div className="inline-block bg-white text-primary-red font-bold px-6 py-4 rounded-full text-4xl">
+    <div className="min-h-screen bg-slate-50 text-slate-800">
+      <section className="relative overflow-hidden bg-gradient-to-br from-sky-700 via-blue-700 to-indigo-800 text-white">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(255,255,255,0.22),_transparent_35%)]" />
+        <div className="relative mx-auto flex max-w-6xl flex-col px-4 py-20 text-center sm:py-24">
+          <div className="mb-6 flex justify-center">
+            <div className="flex h-16 w-16 items-center justify-center rounded-full bg-white/15 text-4xl shadow-lg backdrop-blur-sm">
               📡
             </div>
           </div>
-          <h1 className="text-5xl md:text-6xl font-bold mb-4">StreetWifi</h1>
-          <p className="text-xl md:text-2xl mb-8 text-light-red">
-            Instant WiFi Access - No Account Needed
+          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.3em] text-blue-100">
+            Smart public WiFi access
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <h1 className="mb-4 text-4xl font-bold sm:text-5xl lg:text-6xl">
+            StreetWifi makes connection effortless
+          </h1>
+          <p className="mx-auto mb-8 max-w-2xl text-lg text-blue-100 sm:text-xl">
+            Pay for reliable internet in seconds and get online without a complicated signup process.
+          </p>
+          <div className="flex flex-col justify-center gap-3 sm:flex-row">
             <button
               onClick={() => window.location.href = '/portal.html'}
-              className="bg-white text-primary-red px-8 py-3 rounded-lg font-bold hover:bg-light-red transition text-lg"
+              className="rounded-full bg-white px-8 py-3 text-lg font-semibold text-blue-700 transition hover:-translate-y-0.5 hover:bg-blue-50"
             >
               Access Portal
             </button>
             <button
               onClick={() => navigate('/admin/login')}
-              className="bg-transparent border-2 border-white text-white px-8 py-3 rounded-lg font-bold hover:bg-white hover:text-primary-red transition text-lg"
+              className="rounded-full border border-white/30 bg-white/10 px-8 py-3 text-lg font-semibold text-white transition hover:bg-white/20"
             >
-              Admin Panel
+              Admin Access
             </button>
           </div>
-        </div>
-      </section>
 
-      {/* Features Section */}
-      <section className="py-16 px-4 bg-white">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-bold text-center text-primary-red mb-12">Why Choose StreetWifi?</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Feature 1 */}
-            <div className="bg-light-red p-6 rounded-lg shadow-md text-center">
-              <div className="text-4xl mb-4">⚡</div>
-              <h3 className="text-xl font-bold text-primary-red mb-2">Instant Access</h3>
-              <p className="text-gray-600">
-                No registration required. Connect your device and pay instantly.
-              </p>
+          <div className="mt-10 grid gap-4 md:grid-cols-3">
+            <div className="rounded-2xl border border-white/20 bg-white/10 p-4 text-left backdrop-blur">
+              <p className="text-2xl font-bold">10 KES</p>
+              <p className="text-sm text-blue-100">per hour</p>
             </div>
-
-            {/* Feature 2 */}
-            <div className="bg-light-red p-6 rounded-lg shadow-md text-center">
-              <div className="text-4xl mb-4">💰</div>
-              <h3 className="text-xl font-bold text-primary-red mb-2">Affordable Pricing</h3>
-              <p className="text-gray-600">
-                Just 10 KES per hour. Pay only for what you use.
-              </p>
+            <div className="rounded-2xl border border-white/20 bg-white/10 p-4 text-left backdrop-blur">
+              <p className="text-2xl font-bold">1–24 hrs</p>
+              <p className="text-sm text-blue-100">flexible access windows</p>
             </div>
-
-            {/* Feature 3 */}
-            <div className="bg-light-red p-6 rounded-lg shadow-md text-center">
-              <div className="text-4xl mb-4">🔒</div>
-              <h3 className="text-xl font-bold text-primary-red mb-2">Secure Payments</h3>
-              <p className="text-gray-600">
-                M-Pesa payments via PayHero for safe, quick transactions.
-              </p>
-            </div>
-
-            {/* Feature 4 */}
-            <div className="bg-light-red p-6 rounded-lg shadow-md text-center">
-              <div className="text-4xl mb-4">📱</div>
-              <h3 className="text-xl font-bold text-primary-red mb-2">Easy One-Click</h3>
-              <p className="text-gray-600">
-                Select hours, enter phone number, pay. That's it!
-              </p>
-            </div>
-
-            {/* Feature 5 */}
-            <div className="bg-light-red p-6 rounded-lg shadow-md text-center">
-              <div className="text-4xl mb-4">⏰</div>
-              <h3 className="text-xl font-bold text-primary-red mb-2">Flexible Hours</h3>
-              <p className="text-gray-600">
-                1 to 24 hours. Extend your session anytime you need more access.
-              </p>
-            </div>
-
-            {/* Feature 6 */}
-            <div className="bg-light-red p-6 rounded-lg shadow-md text-center">
-              <div className="text-4xl mb-4">🌍</div>
-              <h3 className="text-xl font-bold text-primary-red mb-2">Available 24/7</h3>
-              <p className="text-gray-600">
-                High-speed WiFi hotspots always on. Stay connected anywhere.
-              </p>
+            <div className="rounded-2xl border border-white/20 bg-white/10 p-4 text-left backdrop-blur">
+              <p className="text-2xl font-bold">24/7</p>
+              <p className="text-sm text-blue-100">reliable hotspot service</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* How It Works Section */}
-      <section className="py-16 px-4 bg-light-red">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-bold text-center text-primary-red mb-12">How It Works</h2>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div className="text-center">
-              <div className="inline-block bg-primary-red text-white rounded-full w-12 h-12 flex items-center justify-center text-2xl font-bold mb-4">
-                1
-              </div>
-              <h3 className="text-xl font-bold text-primary-red mb-2">Connect</h3>
-              <p className="text-gray-600">Join the StreetWifi network</p>
-            </div>
-            <div className="text-center">
-              <div className="inline-block bg-primary-red text-white rounded-full w-12 h-12 flex items-center justify-center text-2xl font-bold mb-4">
-                2
-              </div>
-              <h3 className="text-xl font-bold text-primary-red mb-2">Select Hours</h3>
-              <p className="text-gray-600">Choose your WiFi duration</p>
-            </div>
-            <div className="text-center">
-              <div className="inline-block bg-primary-red text-white rounded-full w-12 h-12 flex items-center justify-center text-2xl font-bold mb-4">
-                3
-              </div>
-              <h3 className="text-xl font-bold text-primary-red mb-2">Pay via M-Pesa</h3>
-              <p className="text-gray-600">Quick and secure payment</p>
-            </div>
-            <div className="text-center">
-              <div className="inline-block bg-primary-red text-white rounded-full w-12 h-12 flex items-center justify-center text-2xl font-bold mb-4">
-                4
-              </div>
-              <h3 className="text-xl font-bold text-primary-red mb-2">Enjoy Internet</h3>
-              <p className="text-gray-600">Instant full WiFi access</p>
-            </div>
+      <section className="px-4 py-16">
+        <div className="mx-auto max-w-6xl">
+          <div className="mb-8 text-center">
+            <p className="mb-2 text-sm font-semibold uppercase tracking-[0.3em] text-blue-600">Why choose us</p>
+            <h2 className="text-3xl font-bold text-slate-800 sm:text-4xl">Built for quick, dependable WiFi access</h2>
           </div>
-        </div>
-      </section>
-
-      {/* Pricing Section */}
-      <section className="py-16 px-4 bg-white">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-bold text-center text-primary-red mb-12">Simple Pricing</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {[1, 2, 5, 10].map((hours) => (
+          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+            {features.map((feature) => (
               <div
-                key={hours}
-                className="bg-white rounded-lg shadow-md p-6 text-center border-t-4 border-primary-red"
+                key={feature.title}
+                className="rounded-2xl border border-blue-100 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
               >
-                <p className="text-3xl font-bold text-primary-red">{hours}h</p>
-                <p className="text-sm text-gray-600 my-2">WiFi access</p>
-                <p className="text-2xl font-bold text-primary-red">{hours * 10} KES</p>
-                <p className="text-xs text-gray-600">10 KES per hour</p>
+                <div className="mb-4 text-4xl">{feature.icon}</div>
+                <h3 className="mb-2 text-xl font-semibold text-blue-700">{feature.title}</h3>
+                <p className="text-sm leading-6 text-slate-600">{feature.text}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="bg-gradient-to-r from-primary-red to-dark-red text-white py-16 px-4">
-        <div className="max-w-6xl mx-auto text-center">
-          <h2 className="text-4xl font-bold mb-4">Ready to Get Connected?</h2>
-          <p className="text-xl mb-8">Open the StreetWifi portal to get instant internet access.</p>
-          <button
-            onClick={() => window.location.href = '/portal.html'}
-            className="bg-white text-primary-red px-10 py-3 rounded-lg font-bold hover:bg-light-red transition text-lg"
-          >
-            Access Portal Now
-          </button>
+      <section className="bg-blue-50 px-4 py-16">
+        <div className="mx-auto max-w-6xl">
+          <div className="mb-10 text-center">
+            <p className="mb-2 text-sm font-semibold uppercase tracking-[0.3em] text-blue-600">How it works</p>
+            <h2 className="text-3xl font-bold text-slate-800 sm:text-4xl">A simple flow from connect to browse</h2>
+          </div>
+          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+            {steps.map((step) => (
+              <div key={step.number} className="rounded-2xl bg-white p-6 text-center shadow-sm">
+                <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-blue-600 text-xl font-bold text-white">
+                  {step.number}
+                </div>
+                <h3 className="mb-2 text-lg font-semibold text-slate-800">{step.title}</h3>
+                <p className="text-sm leading-6 text-slate-600">{step.text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="px-4 py-16">
+        <div className="mx-auto max-w-6xl">
+          <div className="rounded-3xl bg-gradient-to-r from-blue-700 to-indigo-800 p-8 text-center text-white shadow-xl sm:p-12">
+            <h2 className="mb-3 text-3xl font-bold sm:text-4xl">Ready to get connected?</h2>
+            <p className="mx-auto mb-8 max-w-2xl text-lg text-blue-100">
+              Open the StreetWifi portal and start your session instantly with a quick M-Pesa payment.
+            </p>
+            <button
+              onClick={() => window.location.href = '/portal.html'}
+              className="rounded-full bg-white px-8 py-3 text-lg font-semibold text-blue-700 transition hover:-translate-y-0.5 hover:bg-blue-50"
+            >
+              Access Portal Now
+            </button>
+          </div>
         </div>
       </section>
     </div>

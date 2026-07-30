@@ -12,19 +12,19 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="bg-gradient-to-r from-primary-red to-dark-red text-white shadow-lg sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-        <Link to="/" className="flex items-center space-x-2">
-          <div className="bg-white text-primary-red font-bold px-3 py-2 rounded-lg text-lg">
+    <nav className="sticky top-0 z-50 border-b border-blue-100/70 bg-gradient-to-r from-sky-700 via-blue-700 to-indigo-800 text-white shadow-lg shadow-blue-900/20">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4">
+        <Link to="/" className="flex items-center space-x-3">
+          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/15 text-xl backdrop-blur-sm">
             📡
           </div>
-          <span className="font-bold text-xl hidden sm:inline">StreetWifi</span>
+          <span className="hidden text-lg font-semibold sm:inline">StreetWifi</span>
         </Link>
 
-        <div className="flex items-center space-x-6">
+        <div className="flex items-center space-x-2 sm:space-x-4">
           <button
             onClick={() => window.location.href = '/portal.html'}
-            className="hover:bg-dark-red px-3 py-2 rounded transition"
+            className="rounded-full px-3 py-2 text-sm font-medium transition hover:bg-white/10"
           >
             Portal
           </button>
@@ -33,13 +33,13 @@ export default function Navbar() {
             <>
               <Link
                 to="/admin/dashboard"
-                className="hidden md:inline hover:bg-dark-red px-3 py-2 rounded transition"
+                className="hidden rounded-full px-3 py-2 text-sm font-medium transition hover:bg-white/10 md:inline"
               >
                 Dashboard
               </Link>
               <button
                 onClick={handleAdminLogout}
-                className="bg-light-red text-primary-red px-4 py-2 rounded font-semibold hover:bg-red-200 transition"
+                className="rounded-full bg-white/15 px-4 py-2 text-sm font-semibold transition hover:bg-white/25"
               >
                 Admin Logout
               </button>
@@ -47,7 +47,7 @@ export default function Navbar() {
           ) : (
             <Link
               to="/admin/login"
-              className="bg-light-red text-primary-red px-4 py-2 rounded font-semibold hover:bg-red-200 transition"
+              className="rounded-full bg-white/15 px-4 py-2 text-sm font-semibold transition hover:bg-white/25"
             >
               Admin
             </Link>

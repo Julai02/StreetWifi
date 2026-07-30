@@ -19,6 +19,7 @@
       justify-content: center;
       align-items: center;
       padding: 20px;
+      position: relative;
     }
     
     .container {
@@ -38,7 +39,7 @@
     .logo {
       font-size: 32px;
       font-weight: bold;
-      color: #DC2626;
+      color: #2563eb;
       margin-bottom: 10px;
     }
     
@@ -72,14 +73,14 @@
     }
     
     .plan:hover {
-      border-color: #DC2626;
-      background: #fef2f2;
+      border-color: #2563eb;
+      background: #eff6ff;
       transform: translateY(-2px);
     }
     
     .plan.selected {
-      border-color: #DC2626;
-      background: linear-gradient(135deg, #fef2f2, #fee2e2);
+      border-color: #2563eb;
+      background: linear-gradient(135deg, #eff6ff, #dbeafe);
     }
     
     .plan-hours {
@@ -92,7 +93,7 @@
     .plan-price {
       font-size: 20px;
       font-weight: 600;
-      color: #DC2626;
+      color: #2563eb;
       margin-bottom: 5px;
     }
     
@@ -124,8 +125,8 @@
     
     input:focus, select:focus {
       outline: none;
-      border-color: #DC2626;
-      box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+      border-color: #2563eb;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
     }
     
     .button-group {
@@ -146,12 +147,12 @@
     }
     
     .btn-primary {
-      background: linear-gradient(135deg, #DC2626, #991b1b);
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
       color: white;
     }
     
     .btn-primary:hover:not(:disabled) {
-      box-shadow: 0 10px 20px rgba(220, 38, 38, 0.2);
+      box-shadow: 0 10px 20px rgba(37, 99, 235, 0.2);
       transform: translateY(-2px);
     }
     
@@ -202,12 +203,12 @@
     }
     
     .info-box {
-      background: #fef2f2;
-      border-left: 4px solid #DC2626;
+      background: #eff6ff;
+      border-left: 4px solid #2563eb;
       padding: 12px;
       border-radius: 4px;
       font-size: 13px;
-      color: #7f1d1d;
+      color: #1e40af;
       margin-bottom: 20px;
     }
     
@@ -227,11 +228,18 @@
     .timer {
       font-size: 18px;
       font-weight: bold;
-      color: #DC2626;
+      color: #2563eb;
     }
   </style>
 </head>
 <body>
+  <!-- Admin Login Button - Top Right Corner -->
+  <div style="position: absolute; top: 20px; right: 20px; z-index: 1000;">
+    <button onclick="window.location.href='/admin/login'" style="background: white; color: #2563eb; padding: 8px 16px; border-radius: 6px; border: none; font-weight: 500; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+      Admin Access
+    </button>
+  </div>
+
   <div class="container">
     <div class="header">
       <div class="logo">🛜 StreetWifi</div>
@@ -276,7 +284,10 @@
   </div>
 
   <script>
-    const API_URL = 'http://localhost:5000/api/portal';
+    // Get API URL from environment or use production URL
+    const API_URL = window.location.hostname === 'localhost' 
+      ? 'http://localhost:5000/api/portal'
+      : 'https://streetwifi.onrender.com/api/portal';
     const PRICE_PER_HOUR = 10;
     const VALID_HOURS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 24];
     const PLANS = VALID_HOURS.map(hours => ({
